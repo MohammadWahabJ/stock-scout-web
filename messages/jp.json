@@ -1,0 +1,13 @@
+{
+    "common":{
+        "login": "ログイン",
+        "signup": "サインアップ",
+        "dashboard": "ダッシュボード",
+        "copyright": "著作権",
+        "reserved": "すべての権利は Stock Scout が保有します"
+    },
+    "HomePage": {
+        "title": "Stock Scout へようこそ!",
+        "desc": "株式市場を登録、ログイン、探索できる場所。"
+    }
+}

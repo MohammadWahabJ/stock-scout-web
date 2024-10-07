@@ -1,0 +1,14 @@
+{
+  "common":{
+        "login": "Login",
+        "signup": "Sign Up",
+        "dashboard": "Dashboard",
+        "copyright": "Copyright",
+        "reserved": "All right reserved by Stock Scout"
+    },
+  "HomePage": {
+    "title": "Welcome to Stock Scout!",
+    "desc": "A place where you can register, login, and explore your stock market."
+
+  }
+}
