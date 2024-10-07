@@ -1,89 +1,36 @@
-// pages/dashboard.js
+'use client'
 
 import Head from 'next/head';
+import {filterStocksBySymbols} from '../../data'
 
-// Mock stock data for companies
-const companies = [
-  {
-    name: 'Apple Inc.',
-    symbol: 'AAPL',
-    price: 145.09,
-    change: 1.25, // in percentage
-    marketCap: '2.41T',
-  },
-  {
-    name: 'Tesla, Inc.',
-    symbol: 'TSLA',
-    price: 739.78,
-    change: -2.31,
-    marketCap: '748.89B',
-  },
-  {
-    name: 'Microsoft Corporation',
-    symbol: 'MSFT',
-    price: 296.32,
-    change: 0.86,
-    marketCap: '2.21T',
-  },
-  {
-    name: 'Amazon.com, Inc.',
-    symbol: 'AMZN',
-    price: 3401.46,
-    change: -0.44,
-    marketCap: '1.73T',
-  },
-];
+const watchlist = ["6981","7203", "6758", "9984"];
 
 export default function Dashboard() {
-  return (
-    <>
-      <Head>
-        <title>Company Stock Dashboard</title>
-      </Head>
+  const watchlistStocks = filterStocksBySymbols(watchlist)
 
-      <div className="min-h-screen bg-gray-100">
-        {/* Dashboard Header */}
-        <div className="bg-white shadow-md py-4 px-6 mb-6">
-          <h1 className="text-3xl font-semibold text-gray-800">Stock Market Dashboard</h1>
-          <p className="text-sm text-gray-500">Overview of your favorite companies' stock prices and changes.</p>
-        </div>
+    return (
+ <div className="min-h-screen bg-gray-100 py-6">
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-semibold text-center mb-8">Stock Dashboard</h1>
 
-        {/* Stock Data Table */}
-        <div className="container mx-auto px-4">
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Company Stock Summary</h2>
-            
-            <div className="overflow-x-auto">
-              <table className="table table-zebra w-full">
-                <thead>
-                  <tr>
-                    <th>Company</th>
-                    <th>Symbol</th>
-                    <th>Price</th>
-                    <th>Change (%)</th>
-                    <th>Market Cap</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {companies.map((company) => (
-                    <tr key={company.symbol}>
-                      <td className="text-gray-700 font-medium">{company.name}</td>
-                      <td className="text-gray-500">{company.symbol}</td>
-                      <td className={`font-semibold ${company.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        ${company.price.toFixed(2)}
-                      </td>
-                      <td className={`${company.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {company.change.toFixed(2)}%
-                      </td>
-                      <td className="text-gray-700">{company.marketCap}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {watchlistStocks.map((stock) => (
+            <div key={stock.symbol} className="bg-white p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl font-semibold text-gray-800">{stock.name}</h2>
+              <p className="text-gray-600">Symbol: {stock.symbol}</p>
+              <p className="text-gray-600">Market Cap: {stock.marketCap}</p>
+              <p className="text-2xl font-bold mt-2">¥{stock.price.toFixed(2)}</p>
+              <p
+                className={`mt-2 text-lg ${
+                  stock.change > 0 ? 'text-green-500' : 'text-red-500'
+                }`}
+              >
+                {stock.change > 0 ? `+${stock.change}%` : `${stock.change}%`}
+              </p>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </>
-  );
+    </div>
+    );
 }
