@@ -181,7 +181,7 @@ const stockData = [
     }
 ];
 
-export function getStockBySymbol(symbol) {
+export function getStockBySymbol(symbol: string) {
     const stock = stockData.find((company) => company.symbol === symbol);
 
     if (stock) {
@@ -191,13 +191,13 @@ export function getStockBySymbol(symbol) {
     }
 }
 
-export function filterStocksBySymbols(symbols) {
+export function filterStocksBySymbols(symbols: string[]) {
   const filteredStocks = stockData.filter((company) => symbols.includes(company.symbol));
 
   if (filteredStocks.length > 0) {
     return filteredStocks;
   } else {
-    return "No stocks found for the provided symbols.";
+    return [];
   }
 }
 

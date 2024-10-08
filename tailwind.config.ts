@@ -12,7 +12,7 @@ const config: Config = {
         },
     },
     daisyui: {
-        themes: ["light", "dark", "cupcake", "nord"],
+        themes: ["light", "dark", "cupcake", "nord", "valentine"],
     },
     plugins: [daisyui],
 };

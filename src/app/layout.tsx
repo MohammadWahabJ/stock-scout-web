@@ -18,7 +18,6 @@ const geistMono = localFont({
     weight: "100 900",
 });
 
-
 export default async function RootLayout({
     children,
 }: Readonly<{

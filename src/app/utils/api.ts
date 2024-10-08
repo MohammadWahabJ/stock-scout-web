@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:7000';
 console.log(BASE_URL)
 
 // Create a general axios instance
@@ -22,7 +22,7 @@ const setAuthHeader = (token: string) => {
 };
 
 // Public API Call (No token needed)
-export const publicApiCall = async (endpoint: string, method: 'get' | 'post' | 'put' | 'delete', data?: any) => {
+export const publicApiCall = async (endpoint: string, method: 'get' | 'post' | 'put' | 'delete', data?: object) => {
     try {
         const response = await axiosInstance({
             url: endpoint,
@@ -32,14 +32,14 @@ export const publicApiCall = async (endpoint: string, method: 'get' | 'post' | '
 
         setCookie('authToken', response.data?.access_token)
         return response.data;
-    } catch (error: any) {
-        console.error('Public API Error:', error.response || error.message);
+    } catch (error) {
+        // console.error('Public API Error:', error?.response || error?.message);
         throw error;
     }
 };
 
 // Private API Call (Token needed)
-export const privateApiCall = async (endpoint: string, method: 'get' | 'post' | 'put' | 'delete', data?: any) => {
+export const privateApiCall = async (endpoint: string, method: 'get' | 'post' | 'put' | 'delete', data?: object) => {
     try {
         // Get token from cookies/localStorage/sessionStorage
         const token = getCookie('authToken'); // or localStorage.getItem('authToken');
@@ -55,8 +55,8 @@ export const privateApiCall = async (endpoint: string, method: 'get' | 'post' | 
             data,
         });
         return response.data;
-    } catch (error: any) {
-        console.error('API Error:', error.response || error.message);
+    } catch (error) {
+        // console.error('API Error:', error.response || error.message);
         throw error;
     }
 };
@@ -83,8 +83,8 @@ export const stockApiCall = async (endpoint: string, params: object = {}) => {
             }
         });
         return response.data;
-    } catch (error: any) {
-        console.error('API Error:', error.response || error.message);
+    } catch (error) {
+        // console.error('API Error:', error.response || error.message);
         throw error;
     }
 };

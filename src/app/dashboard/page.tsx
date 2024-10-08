@@ -1,6 +1,5 @@
 'use client'
 
-import Head from 'next/head';
 import {filterStocksBySymbols} from '../../data'
 
 const watchlist = ["6981","7203", "6758", "9984"];
@@ -14,7 +13,7 @@ export default function Dashboard() {
         <h1 className="text-3xl font-semibold text-center mb-8">Stock Dashboard</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {watchlistStocks.map((stock) => (
+          {watchlistStocks?.map((stock) => (
             <div key={stock.symbol} className="bg-white p-6 rounded-lg shadow-lg">
               <h2 className="text-xl font-semibold text-gray-800">{stock.name}</h2>
               <p className="text-gray-600">Symbol: {stock.symbol}</p>
