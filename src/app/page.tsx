@@ -1,9 +1,14 @@
 import { useTranslations } from 'next-intl';
 import Head from 'next/head';
 import Link from 'next/link';
+import { cookies } from 'next/headers';
+
 export default function Home() {
     const t = useTranslations('HomePage');
     const c = useTranslations('common');
+
+    const cookieStore = cookies();
+    const authToken = cookieStore.get('authToken')?.value;
 
     return (
         <>
@@ -21,12 +26,20 @@ export default function Home() {
                     </p>
 
                     <div className="space-x-4">
-                        <Link href="/auth/login" className="btn btn-primary">
-                            {c('login')}
-                        </Link>
-                        <Link href="/auth/signup" className="btn btn-secondary">
-                            {c('signup')}
-                        </Link>
+                        {authToken ?
+                            <Link href="/dashboard" className="btn btn-primary">
+                                {c('dashboard')}
+                            </Link>
+                            :
+                            <>
+                                <Link href="/auth/login" className="btn btn-primary">
+                                    {c('login')}
+                                </Link>
+                                <Link href="/auth/signup" className="btn btn-secondary">
+                                    {c('signup')}
+                                </Link>
+                            </>
+                        }
                     </div>
                 </div>
             </div>

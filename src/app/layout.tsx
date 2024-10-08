@@ -4,6 +4,9 @@ import { getLocale, getMessages } from 'next-intl/server';
 import localFont from "next/font/local";
 import LanguageSelector from './LanguageSelector';
 import "./globals.css";
+import { cookies } from 'next/headers';
+import Link from 'next/link';
+
 // import { useEffect } from 'react'
 // import { themeChange } from 'theme-change'
 
@@ -25,6 +28,9 @@ export default async function RootLayout({
 }>) {
     const locale = await getLocale();
     const messages = await getMessages();
+
+    const cookieStore = cookies();
+    const authToken = cookieStore.get('authToken')?.value;
 
     return (
         <html lang={locale} data-theme="nord">
@@ -53,6 +59,7 @@ export default async function RootLayout({
                                     tabIndex={0}
                                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                                     <li><a href="/dashboard">Dashboard</a></li>
+                                    <li><a href="/dashboard/stock-list">Stock List</a></li>
                                 </ul>
                             </div>
                             <a href="/" className="btn btn-ghost text-xl">Stock Scout</a>
@@ -65,6 +72,16 @@ export default async function RootLayout({
                         </div>
                         <div className="navbar-end">
                             <button data-toggle-theme="dark,light" data-act-class="ACTIVECLASS"></button>
+                            {authToken ?
+                                <Link href="/logout" className="btn btn-primary mr-2">
+                                    Logout
+                                </Link>
+
+                                :
+                                <>
+                                </>
+
+                            }
                             {/* Language Selector Dropdown */}
                             <LanguageSelector initialLocale={locale} />
                         </div>

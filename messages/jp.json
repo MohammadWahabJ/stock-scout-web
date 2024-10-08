@@ -2,6 +2,7 @@
     "common":{
         "login": "ログイン",
         "signup": "サインアップ",
+        "logout": "ログアウト",
         "dashboard": "ダッシュボード",
         "copyright": "著作権",
         "reserved": "すべての権利は Stock Scout が保有します"
